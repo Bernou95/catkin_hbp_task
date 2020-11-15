@@ -1,6 +1,6 @@
 # catkin_hbp_task
 
-Foobar is a Python library for dealing with word pluralization.
+Updated with the nodes that solves the two behaviors requested 
 
 ## Installation
 
