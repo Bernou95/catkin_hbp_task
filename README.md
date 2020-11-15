@@ -4,7 +4,7 @@ Foobar is a Python library for dealing with word pluralization.
 
 ## Installation
 
-1.-Clone the provided workspace and build it running catkin_make from the root folder (tested in Ubuntu 20.04 / ROS noetic / Gazebo 11)
+1.-Clone the provided workspace and build it running catkin_make from the root folder (tested in Ubuntu 20.04 / ROS noetic / Gazebo 11)  
 2.-Add the following lines to your .bashrc file and source it 
 
 ```bash
