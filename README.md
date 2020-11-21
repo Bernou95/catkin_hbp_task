@@ -11,7 +11,7 @@ Updated with the nodes that solves the two behaviors requested
 source /opt/ros/noetic/setup.bash
 export CATKIN_WS=/replace/with/the/path/to/catkin_hbp_task
 source $CATKIN_WS/devel/setup.bash
-export GAZEBO_MODEL_Path=$CATKIN_WS/src/gazebo_environment/models
+export GAZEBO_MODEL_PATH=$CATKIN_WS/src/gazebo_environment/models
 ```
 
 ## Usage
