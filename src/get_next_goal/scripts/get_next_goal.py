@@ -1,32 +1,48 @@
-#!/usr/bin/env python
-import rospy
-from gazebo_msgs2.srv import GetNextPoint, GetNextPointResponse, GetNextColor, GetNextColorResponse
+#!/usr/bin/env python3
+import rclpy
+from rclpy.node import Node
+from gazebo_msgs2.srv import GetNextPoint, GetNextColor
 from geometry_msgs.msg import Point
 from std_msgs.msg import String
 import random
 from math import sin, cos, pi, floor
 
-colors = ['red', 'blue', 'grey', 'white']
+colors = ['red', 'blue', 'gren']
 
-def generate_point(r):
-    alpha = random.random() * 2 * pi
-    return Point(r * cos(alpha), r * sin(alpha), 0)
+class GoalService(Node):
 
-def get_point(req):
-    return GetNextPointResponse(generate_point(10))
+    def __init__(self):
+        super().__init__('goal_service')
+        self.srv1 = self.create_service(GetNextPoint, 'get_next_point', self.get_point_callback)
+        self.srv2 = self.create_service(GetNextColor, 'get_next_color', self.get_color_callback)
 
-def get_color(req):
-    color = String(colors[floor(random.random() * len(colors))])
-    return GetNextColorResponse(color)
 
-def pub_sound():
-    rospy.init_node('get_next_goal', anonymous=True)
-    s1 = rospy.Service('get_point', GetNextPoint, get_point)
-    s2 = rospy.Service('get_color', GetNextColor, get_color)
-    rospy.spin()
+    def get_point_callback(self, request, response):
+        response.next_point = generate_point(10)
+        #self.get_logger().info('Incoming request\na: %d b: %d' % (request.a, request.b))
+
+        return response
+
+    def generate_point(r):
+        alpha = random.random() * 2 * pi
+        return Point(r * cos(alpha), r * sin(alpha), 0)
+    
+    def get_color_callback(self, request, response):
+        response.color = String(colors[floor(random.random() * len(colors))])
+        #self.get_logger().info('Incoming request\na: %d b: %d' % (request.a, request.b))
+
+        return response
+
+
+def main():
+    rclpy.init()
+
+    goal_service = GoalService()
+
+    rclpy.spin(goal_service)
+
+    rclpy.shutdown()
+
 
 if __name__ == '__main__':
-    try:
-        pub_sound()
-    except rospy.ROSInterruptException:
-        pass
+    main()
