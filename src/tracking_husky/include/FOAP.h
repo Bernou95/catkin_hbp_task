@@ -66,7 +66,7 @@ class FOAP{
     private:
         static Eigen::MatrixXd transpose(Eigen::MatrixXd const M);
         static Eigen::VectorXd agentsDistances(Eigen::MatrixXd const q, int current);
-static Eigen::VectorXd agentsDistances2(Eigen::MatrixXd const q, int current);
+        static Eigen::VectorXd agentsDistances2(Eigen::MatrixXd const q, int current);
         static Eigen::VectorXd obstaclesDistances(Eigen::VectorXd const q_i, Eigen::MatrixXd const qobs);
         static double nearestAgent(Eigen::MatrixXd const q, Eigen::VectorXd &nearest, int current);
         static double nearestObstacle(Eigen::VectorXd const q_i, Eigen::MatrixXd const qobs, Eigen::VectorXd &nearest);
