@@ -1,60 +1,16 @@
 cmake_minimum_required(VERSION 2.8.3)
 project(gazebo_msgs2)
 
-find_package(catkin REQUIRED COMPONENTS
-  std_msgs
-  nav_msgs
-  trajectory_msgs
-  geometry_msgs
-  sensor_msgs
-  std_srvs
-  message_generation
-  )
-
-add_message_files(
-  DIRECTORY msg
-  FILES
-# NRP custom messages
-  JointStates.msg
-  OpenSimPhysics.msg
-  WheelSpeeds.msg
-  )
-
-add_service_files(DIRECTORY srv FILES
-# NRP custom services
-  AdvanceSimulation.srv
-  DeleteLight.srv
-  ExportWorldSDF.srv
-  GetLightProperties.srv
-  GetLightsName.srv
-  GetVisualProperties.srv
-  SetLightProperties.srv
-  SetVisualProperties.srv
-  SetSensorNoiseProperties.srv
-  GetSensorNoiseProperties.srv
-  SetHuskyCmdVel.srv
-  GetHuskyOdometry.srv
-  GetHuskyJointStates.srv
-  SetHuskyWheelSpeeds.srv
-  GetNextPoint.srv
-  GetNextColor.srv
-  )
-
-generate_messages(DEPENDENCIES
-  std_msgs
-  geometry_msgs
-  nav_msgs
-  sensor_msgs
-  trajectory_msgs
-  )
-
-catkin_package(
-  CATKIN_DEPENDS
-  message_runtime
-  std_msgs
-  nav_msgs
-  trajectory_msgs
-  geometry_msgs
-  sensor_msgs
-  std_srvs
-  )
+find_package(std_msgs REQUIRED)
+find_package(geometry_msgs REQUIRED)
+find_package(rosidl_default_generators REQUIRED)
+  
+rosidl_generate_interfaces(${PROJECT_NAME}
+  "msg/JointStates.msg"
+  "msg/OpenSimPhysics.msg"
+  "msg/WheelSpeeds.msg"
+  
+  "srv/GetNextPoint.srv"
+  "srv/GetNextColor.srv"
+  DEPENDENCIES std_msgs geometry_msgs # Add packages that above messages depend on, in this case geometry_msgs for Sphere.msg
+)
