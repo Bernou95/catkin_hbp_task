@@ -7,7 +7,7 @@ from std_msgs.msg import String
 import random
 from math import sin, cos, pi, floor
 
-colors = ['red', 'blue', 'gren']
+colors = ['red', 'blue', 'green']
 
 class GoalService(Node):
 
